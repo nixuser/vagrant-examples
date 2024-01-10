@@ -1,0 +1,12 @@
+Vagrant.__(2) do |config|
+  config.vm.__ "vm-1" do |srv|
+    srv.vm.__ = "almalinux/9.2"
+    srv.vm.__ "./", "/vagrant"
+    srv.vm.__ = "srv-1"
+    srv.vm.__(:private_network, ip: "192.168.50.11")
+    srv.vm.__ "virtualbox" do |vb|
+      vb.__ = "2048"
+      vb.__ = "1"
+    end
+  end
+end

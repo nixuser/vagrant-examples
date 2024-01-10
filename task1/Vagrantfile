@@ -1,0 +1,12 @@
+Vagrant.configure(2) do |config|
+  config.vm.define "vm-1" do |srv|
+    srv.vm.box = "almalinux/9.2"
+    srv.vm.synced_folder "./", "/vagrant"
+    srv.vm.hostname = "srv-1"
+    srv.vm.network(:private_network, ip: "192.168.50.11")
+    srv.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+      vb.cpus = "1"
+    end
+  end
+end

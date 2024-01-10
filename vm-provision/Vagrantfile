@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "almalinux/9.2"
+  config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+  end
+
+  config.vm.provision "shell", name: "A", inline: "echo A"
+
+  config.vm.define "web", primary: true do |web|
+    config.vm.provision "shell", name: "B", inline: "echo B"
+  end
+
+  config.vm.provision "shell", name: "C", inline: "echo C"
+
+end
