@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
-  #config.vm.provision "shell", inline: "uname -a"
-  #config.vm.provision "shell", name: "mem", inline: "free -m"
+  config.vm.provision "shell", inline: "uname -a"
+  config.vm.provision "shell", name: "mem", inline: "free -m"
   config.vm.box = "debian/12.1"
   config.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"

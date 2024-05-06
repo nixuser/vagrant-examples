@@ -1,0 +1,25 @@
+Vagrant.configure(2) do |config|
+  config.vm.define "vm-1" do |srv|
+    srv.vm.box = "alma/9.3"
+    srv.vm.hostname = "srv-1"
+    srv.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+      vb.cpus = "1"
+    end
+
+    srv.vm.synced_folder "./", "/vagrant"
+    # export VAGRANT_EXPERIMENTAL="disks"
+    srv.vm.disk :disk, size: "1GB", name: "disk1"
+
+    srv.vm.network(:private_network, ip: "192.168.50.11")
+    srv.vm.network(:forwarded_port,
+                    guest: 22,
+                    host: 3022)
+    srv.vm.network(:private_network,
+                   ip: "192.168.50.11",
+                   intnet: "otus-net")
+    srv.vm.network(:public_network,
+                    ip: "192.168.0.17")
+
+  end
+end
