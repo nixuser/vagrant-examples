@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.define "vm-1" do |srv|
+        srv.vm.box = "rocky/9.5"
+        # конфигурация виртуальной машины для Virtualbox
+        srv.vm.provider "virtualbox" do |vb|
+              vb.memory = "2048"
+              vb.customize ['modifyvm', :id, '--nested-hw-virt', 'on']
+              vb.customize ['modifyvm', :id, '--audio', 'none']
+        end
+        srv.vm.network("forwarded_port", guest: 80, host: 8888)
+        srv.vm.network("private_network", ip: '192.168.50.11', virtualbox__intnet: "otus-net")
+        srv.vm.network("public_network", ip: "192.168.0.17")
+
+    end
+end
